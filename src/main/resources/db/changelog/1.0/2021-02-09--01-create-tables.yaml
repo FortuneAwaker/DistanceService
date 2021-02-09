@@ -1,0 +1,73 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-city
+      author: alexander_popovich
+      changes:
+        - createTable:
+            tableName: city
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: create-table-road
+      author: alexander_popovich
+      changes:
+        - createTable:
+            tableName: road
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_city_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: second_city_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: distance
+                  type: numeric
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: add-country-of-city
+      author: alexander_popovich
+      changes:
+        - addColumn:
+            tableName: city
+            columns:
+              - column:
+                  name: country
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: add-road-name
+      author: alexander_popovich
+      changes:
+        - addColumn:
+            tableName: road
+            columns:
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
