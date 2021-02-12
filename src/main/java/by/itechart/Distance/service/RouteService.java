@@ -1,11 +1,17 @@
 package by.itechart.Distance.service;
 
-import by.itechart.Distance.dto.CityDto;
+import by.itechart.Distance.dto.FindRouteRequest;
 import by.itechart.Distance.dto.RouteDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface RouteService {
+@Service
+@RequiredArgsConstructor
+public class RouteService {
 
-    List<RouteDto> findRoutes(CityDto location, CityDto destination, int numberOfRoutes);
+    public List<RouteDto> findRoutes(final FindRouteRequest request) {
+        return null;
+    }
 }
