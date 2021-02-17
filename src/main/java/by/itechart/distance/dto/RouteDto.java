@@ -14,6 +14,6 @@ import java.util.List;
 public class RouteDto {
 
     private Double totalDistance;
-    private List<RoadDto> usedRoads;
+    private List<CityDto> visitedCities;
 
 }

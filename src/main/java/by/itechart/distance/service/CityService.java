@@ -9,7 +9,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -51,6 +53,10 @@ public class CityService implements BaseService<CityDto> {
     @Transactional
     public void delete(final Long id) {
         cityRepository.deleteById(id);
+    }
+
+    public List<CityDto> getAllCities() {
+        return cityRepository.findAll().stream().map(cityMapper::map).collect(Collectors.toList());
     }
 
 }

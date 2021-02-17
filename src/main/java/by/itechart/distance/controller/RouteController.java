@@ -19,7 +19,7 @@ public class RouteController {
     private final RouteService routeService;
 
     @PostMapping
-    public List<RouteDto> findRoute(@RequestBody FindRouteRequest request) {
+    public RouteDto findRoute(@RequestBody FindRouteRequest request) {
         return routeService.findRoutes(request);
     }
 
