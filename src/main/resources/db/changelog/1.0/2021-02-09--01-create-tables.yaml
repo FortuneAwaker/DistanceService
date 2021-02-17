@@ -71,3 +71,19 @@ databaseChangeLog:
                   type: varchar(50)
                   constraints:
                     nullable: false
+  - changeSet:
+      id: add-city-unique-name-constraint
+      author: alexander_popovich
+      changes:
+        - addUniqueConstraint:
+            columnNames: name
+            constraintName: unique_city_name
+            tableName: city
+  - changeSet:
+      id: add-road-unique-name-constraint
+      author: alexander_popovich
+      changes:
+        - addUniqueConstraint:
+            columnNames: name
+            constraintName: unique_road_name
+            tableName: road

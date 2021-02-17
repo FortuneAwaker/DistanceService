@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: fill-table-city-01
+      author: alexander_popovich
+      changes:
+        -  sqlFile:
+             dbms:  '!h2,  oracle,  mysql'
+             encoding:  UTF-8
+             endDelimiter: ;
+             path: ../sql/2021-02-16--01-fill-table-city.sql
+             relativeToChangelogFile: true
+             splitStatements:  true
+             stripComments:  true
