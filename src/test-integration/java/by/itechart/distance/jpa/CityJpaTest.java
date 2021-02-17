@@ -2,7 +2,6 @@ package by.itechart.distance.jpa;
 
 import by.itechart.distance.entity.City;
 import by.itechart.distance.repository.CityRepository;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
@@ -27,20 +26,18 @@ public class CityJpaTest {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Before
-    public void initCities() {
-        entityManager.persist(
-                City.builder()
-                        .name("Minsk")
-                        .country("Belarus")
-                        .build());
-        entityManager.flush();
-    }
+    private final String sqlFindCityByName = "select id from city where name like ";
 
     @Test
     public void whenFindByName_thenReturnCity() {
         // given
         String persistedName = "Minsk";
+        entityManager.persist(
+                City.builder()
+                        .name(persistedName)
+                        .country("Belarus")
+                        .build());
+        entityManager.flush();
 
         // when
         Optional<City> foundOptional = cityRepository.findByName(persistedName);
@@ -54,12 +51,17 @@ public class CityJpaTest {
     public void whenFindById_thenReturnCity() {
         // given
         String persistedName = "Minsk";
-        // Run SQL without another repo method
-        Optional<City> foundByNameOptional = cityRepository.findByName(persistedName);
-        City foundByName = foundByNameOptional.isEmpty() ? City.builder().build() : foundByNameOptional.get();
+        entityManager.persist(
+                City.builder()
+                        .name(persistedName)
+                        .country("Belarus")
+                        .build());
+        entityManager.flush();
+        Long idFoundByName = jdbcTemplate
+                .queryForObject(sqlFindCityByName + "'" + persistedName + "'", Long.class);
 
         // when
-        Optional<City> foundOptional = cityRepository.findById(foundByName.getId());
+        Optional<City> foundOptional = cityRepository.findById(idFoundByName);
         City found = foundOptional.isEmpty() ? City.builder().build() : foundOptional.get();
 
         // then
