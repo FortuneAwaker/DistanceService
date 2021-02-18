@@ -125,7 +125,7 @@ public class RoadServiceTestPositive {
         Mockito.when(roadRepository.findAll()).thenReturn(roadList);
         Mockito.when(roadMapper.map(road)).thenReturn(roadDto);
         // then
-        Assertions.assertEquals(roadDtoList, roadService.getAllCities());
+        Assertions.assertEquals(roadDtoList, roadService.getAllRoads());
 
     }
 

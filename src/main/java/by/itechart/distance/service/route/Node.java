@@ -43,4 +43,9 @@ public class Node {
         return cityId.intValue();
     }
 
+    @Override
+    public String toString() {
+        return cityId.toString();
+    }
+
 }

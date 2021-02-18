@@ -11,3 +11,15 @@ databaseChangeLog:
              relativeToChangelogFile: true
              splitStatements:  true
              stripComments:  true
+  - changeSet:
+      id: fill-table-road-01
+      author: alexander_popovich
+      changes:
+        -  sqlFile:
+             dbms:  '!h2,  oracle,  mysql'
+             encoding:  UTF-8
+             endDelimiter: ;
+             path: ../sql/2021-02-16--01-fill-table-road.sql
+             relativeToChangelogFile: true
+             splitStatements:  true
+             stripComments:  true

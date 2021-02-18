@@ -10,8 +10,8 @@ public class Graph {
 
     private Set<Node> nodes = new HashSet<>();
 
-    public void addNode(Node nodeA) {
-        nodes.add(nodeA);
+    public void addNode(Node node) {
+        nodes.add(node);
     }
 
 }

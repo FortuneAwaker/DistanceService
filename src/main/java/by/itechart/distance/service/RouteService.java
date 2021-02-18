@@ -26,16 +26,19 @@ public class RouteService {
     public RouteDto findRoutes(final FindRouteRequest request) {
         // добавить проверку на валидность городов в request
         Graph graph = graphInitializer.initializeGraphFromDB();
-        Node startPoint = new Node(request.getFirstCityDto().getId());
+        Node startPoint = graph.getNodes().stream()
+                .filter((node -> node.getCityId().equals(request.getFirstCityDto().getId())))
+                .collect(Collectors.toList()).get(0);;
         graph = calculateShortestPathFromSource(graph, startPoint);
         Node destination = graph.getNodes().stream()
-                .filter((node -> node.getCityId() == request.getSecondCityDto().getId()))
+                .filter((node -> node.getCityId().equals(request.getSecondCityDto().getId())))
                 .collect(Collectors.toList()).get(0);
         List<CityDto> visitedCities = new LinkedList<>();
         for (Node visitedNode: destination.getShortestPath()
              ) {
             visitedCities.add(cityService.findById(visitedNode.getCityId()));
         }
+        visitedCities.add(cityService.findById(request.getSecondCityDto().getId()));
         return new RouteDto(destination.getDistance(), visitedCities);
     }
 

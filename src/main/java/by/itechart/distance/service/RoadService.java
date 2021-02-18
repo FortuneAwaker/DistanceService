@@ -62,7 +62,7 @@ public class RoadService implements BaseService<RoadDto> {
         roadRepository.deleteById(id);
     }
 
-    public List<RoadDto> getAllCities() {
+    public List<RoadDto> getAllRoads() {
         return roadRepository.findAll().stream().map(roadMapper::map).collect(Collectors.toList());
     }
 
